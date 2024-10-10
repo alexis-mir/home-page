@@ -1,0 +1,98 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const projects = [
+  {
+    name: 'Rick and Morty Angular 18',
+    description: t('rickMortyDesc'),
+    image: '/rick-and-morty-project.jpg',
+    altImage: 'Rick and Morty Project',
+    link: 'https://github.com/alexis-mir/rick-and-morty-angular-18'
+  },
+  {
+    name: 'Todos App React',
+    description: t('todosAppDesc'),
+    image: '/todos-app-react.jpg',
+    altImage: 'Todos App React',
+    link: 'https://github.com/alexis-mir/TodosAppReactJs'
+  },
+  {
+    name: 'Challenge Frontend Vue',
+    description: t('challengeVueDesc'),
+    image: '/challenge-frontend-vue.jpg',
+    altImage: 'Challenge Frontend Vue',
+    link: 'https://github.com/alexis-mir/ChallengeFrontendVueTeclab'
+  }
+];
+---
+
+<section id="projects" class="projects">
+  <h2>{t('practiceProjects')}</h2>
+  <div class="projects-grid">
+    {projects.map((project) => (
+      <div class="project-card">
+        <h3>{project.name}</h3>
+        <img src={project.image} alt={project.altImage} loading="lazy">
+        <p>{project.description}</p>
+        <a href={project.link} target="_blank" rel="noopener noreferrer" class="btn">{t('viewProject')}</a>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .projects {
+    padding: 4rem 2rem;
+    background-color: var(--background-color);
+  }
+  h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  .project-card {
+    width: 100%;
+    max-width: 350px; /* Limitar el ancho máximo */
+    background-color: var(--background-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  .project-card:hover {
+    transform: translateY(-5px);
+  }
+  .project-card img {
+    width: 100%; /* La imagen ocupará todo el ancho de la card */
+    height: auto; /* Mantiene la proporción 16:9 */
+    aspect-ratio: 16 / 9;
+  } 
+  .project-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+  .project-card p {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+  .btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  .btn:hover {
+    background-color: #b35a19;
+  }
+</style>

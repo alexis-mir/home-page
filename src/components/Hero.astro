@@ -1,0 +1,82 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <h1 id="typing-text"></h1>
+    <p>{t('briefIntro')}</p>
+  </div>
+</section>
+
+<style>
+  .hero {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/hero-background.gif');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    position: relative; /* Añadir para posicionamiento */
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: inherit;
+    background-size: inherit;
+    background-position: inherit;
+    filter: blur(15px); /* Aplicar desenfoque solo al fondo */
+    z-index: 1;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+    border-radius: 10px;
+    /* Eliminar cualquier filtro que afecte al contenido */
+    filter: none;
+  }
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+</style>
+
+<script>
+  const text = "Alexis Miranda";
+  const typingText = document.getElementById('typing-text');
+  let i = 0;
+
+  function typeWriter() {
+    if (i < text.length) {
+      typingText.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 100);
+    } else {
+      typingText.innerHTML += '<span class="cursor">|</span>';
+      setInterval(() => {
+        const cursor = document.querySelector('.cursor') as HTMLElement;
+        cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+      }, 500);
+    }
+  }
+
+  typeWriter();
+</script>

@@ -1,0 +1,158 @@
+---
+import type { ui } from '../i18n/ui';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const skillCategories = [
+  {
+    name: 'skillCategories.programming',
+    skills: [
+      { name: 'skills.java', icon: 'fab fa-java' },
+      { name: 'skills.javascript', icon: 'fab fa-js' },
+      { name: 'skills.html5', icon: 'fab fa-html5' },
+      { name: 'skills.css3', icon: 'fab fa-css3-alt' },
+      { name: 'skills.sql', icon: 'fas fa-database' }
+    ]
+  },
+  {
+    name: 'skillCategories.frameworks',
+    skills: [
+      { name: 'skills.springBoot', icon: 'fas fa-leaf' },
+      { name: 'skills.springBatch', icon: 'fas fa-leaf' },
+      { name: 'skills.springCloud', icon: 'fas fa-cloud' },
+      { name: 'skills.angular', icon: 'fab fa-angular' },
+      { name: 'skills.vue', icon: 'fab fa-vuejs' },
+      { name: 'skills.react', icon: 'fab fa-react' }
+    ]
+  },
+  {
+    name: 'skillCategories.databases',
+    skills: [
+      { name: 'skills.postgresql', icon: 'fas fa-database' },
+      { name: 'skills.mysql', icon: 'fas fa-database' },
+      { name: 'skills.oracle', icon: 'fas fa-database' },
+      { name: 'skills.mongodb', icon: 'fas fa-leaf' },
+      { name: 'skills.db2', icon: 'fas fa-database' }
+    ]
+  },
+  {
+    name: 'skillCategories.devops',
+    skills: [
+      { name: 'skills.docker', icon: 'fab fa-docker' },
+      { name: 'skills.jenkins', icon: 'fab fa-jenkins' },
+      { name: 'skills.gitlab', icon: 'fab fa-gitlab' },
+      { name: 'skills.aws', icon: 'fab fa-aws' },
+      { name: 'skills.openshift', icon: 'fas fa-ship' },
+      { name: 'skills.linux', icon: 'fab fa-linux' }
+    ]
+  },
+  {
+    name: 'skillCategories.architecture',
+    skills: [
+      { name: 'skills.microservices', icon: 'fas fa-cubes' },
+      { name: 'skills.apiRest', icon: 'fas fa-exchange-alt' },
+      { name: 'skills.hexagonalArchitecture', icon: 'fas fa-hexagon' },
+      { name: 'skills.scrum', icon: 'fas fa-users' }
+    ]
+  }
+];
+---
+
+<section id="skills" class="skills">
+  <div class="container">
+    <h2 class="section-title">{t('skills')}</h2>
+    <div class="skills-container">
+      {skillCategories.map((category) => (
+        <div class="skill-category">
+          <h3 class="category-title">{t(category.name as keyof typeof ui[typeof lang])}</h3>
+          <ul class="skill-list">
+            {category.skills.map((skill) => (
+              <li class="skill-item">
+                <i class={`${skill.icon} skill-icon`}></i>
+                <span>{t(skill.name as keyof typeof ui[typeof lang])}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills {
+    background-color: var(--background-color);
+    padding: 4rem 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+  }
+
+  .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .skill-category {
+    background-color: var(--background-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: calc(33.333% - 2rem);
+    min-width: 250px;
+    transition: transform 0.3s ease;
+  }
+
+  .skill-category:hover {
+    transform: translateY(-5px);
+  }
+
+  .category-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+  }
+
+  .skill-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .skill-item {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+  }
+
+  .skill-icon {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+    width: 20px;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .skill-category {
+      width: 100%;
+    }
+  }
+</style>

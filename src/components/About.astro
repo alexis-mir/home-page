@@ -1,0 +1,66 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id="about" class="about">
+  <h2>{t('aboutMe')}</h2>
+  <div class="about-content">
+    <div class="about-text">
+      <p>{t('aboutMeDesc')}</p>
+    </div>
+    <div class="hobbies">
+      <h3>{t('myHobbies')}</h3>
+      <ul>
+        <li><i class="fas fa-music"></i> {t('piano')}</li>
+        <li><i class="fas fa-film"></i> {t('movies')}</li>
+        <li><i class="fas fa-laptop-code"></i> {t('coding')}</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    padding: 4rem 2rem;
+    background-color: var(--secondary-color);
+  }
+  h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+  }
+  .about-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .about-text {
+    flex: 1;
+    min-width: 300px;
+    margin-right: 2rem;
+  }
+  .hobbies {
+    flex: 1;
+    min-width: 300px;
+  }
+  .hobbies h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+  }
+  .hobbies ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  .hobbies li {
+    margin-bottom: 0.5rem;
+  }
+  .hobbies i {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+  }
+</style>
