@@ -33,18 +33,18 @@ const t = useTranslations(lang);
   const root = document.documentElement;
 
   themeToggle.addEventListener('click', () => {
-    if (root.style.getPropertyValue('--background-color') === '#121212') {
-      // Cambiar a tema claro
-      root.style.setProperty('--primary-color', '#d2691e');
-      root.style.setProperty('--secondary-color', '#ffcc99');
-      root.style.setProperty('--text-color', '#333333');
-      root.style.setProperty('--background-color', '#fdfdfd');
-    } else {
+    if (root.style.getPropertyValue('--background-color') === '#fdfdfd') {
       // Cambiar a tema oscuro
       root.style.setProperty('--primary-color', '#d2691e');
       root.style.setProperty('--secondary-color', '#1b2b37');
       root.style.setProperty('--text-color', '#f5f5f5');
       root.style.setProperty('--background-color', '#121212');
+    } else {
+      // Cambiar a tema claro
+      root.style.setProperty('--primary-color', '#d2691e');
+      root.style.setProperty('--secondary-color', '#ffcc99');
+      root.style.setProperty('--text-color', '#333333');
+      root.style.setProperty('--background-color', '#fdfdfd');
     }
   });
 </script>
@@ -55,7 +55,7 @@ const t = useTranslations(lang);
     top: 0;
     left: 0;
     right: 0;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: var(--background-color);
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
